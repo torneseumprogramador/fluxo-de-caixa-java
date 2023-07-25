@@ -26,9 +26,16 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @RequestParam(required = false) String tipo) {
         // Buscar a lista de caixas do banco de dados
-        List<Caixa> caixas = caixaDAO.findAll();
+        List<Caixa> caixas;
+        
+        if (tipo != null && !tipo.isEmpty()) {
+            caixas = caixaDAO.findByTipoContainingIgnoreCase(tipo);
+        } else {
+            // Caso contrário, buscar todos os caixas
+            caixas = caixaDAO.findAll();
+        }
 
         // Calcular o total de receitas e despesas
         float totalReceitas = 0;

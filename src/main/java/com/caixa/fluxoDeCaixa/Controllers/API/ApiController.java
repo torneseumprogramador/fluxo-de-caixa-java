@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.caixa.fluxoDeCaixa.DAO.CaixaDAO;
@@ -38,14 +39,23 @@ public class ApiController {
         return caixaDAO.save(caixa);
     }
 
-    @DeleteMapping("caixas/{id}")
+    @DeleteMapping("/api/caixas/{id}")
     public void excluirCaixa(@PathVariable int id) {
         caixaDAO.deleteById(id);
     }
 
     @GetMapping("/api/caixas/resumo")
-    public ResumoCaixa getResumoCaixas() {
-        List<Caixa> caixas = caixaDAO.findAll();
+    public ResumoCaixa getResumoCaixas(@RequestParam(required = false) String tipo) {
+        // Buscar a lista de caixas do banco de dados
+        List<Caixa> caixas;
+        
+        if (tipo != null && !tipo.isEmpty()) {
+            caixas = caixaDAO.findByTipoContainingIgnoreCase(tipo);
+        } else {
+            // Caso contrário, buscar todos os caixas
+            caixas = caixaDAO.findAll();
+        }
+        
         float totalReceitas = 0;
         float totalDespesas = 0;
 
