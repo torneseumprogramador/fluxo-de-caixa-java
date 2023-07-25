@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluxo de caixa em java</title>
+  <!-- Incluindo o CSS do Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/app.css">
+</head>
+
+<body>
+  <div class="container margin20">
+    <h1>Fluxo de caixa em Java</h1>
+    <hr>
+
+    <div class="caixas-principal">
+        <div class="caixa-receitas">
+            Valor Total<br>
+            R$ [[${valorTotal}]]
+        </div>
+        <div class="caixa-receitas">
+            Receitas<br>
+            R$ [[${totalReceitas}]]
+        </div>
+        <div class="caixa-receitas despesa">
+            Despesas<br>
+            R$ [[${totalDespesas}]]
+        </div>
+    </div>
+
+    <div class="dvBusca margin20">
+        <div class="dvform">
+            <form>
+                <input type="text"  class="form-control" name="tipo" placeholder="Digite o tipo que deseja">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        <div class="dvAdicionar">
+            <a href="/adicionar" class="btn btn-primary">Adicionar</a>
+        </div>
+    </div>
+
+    <div class="margin20">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">TIPO</th>
+                    <th scope="col">VALOR</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="caixa : ${caixas}">
+                    <td th:text="${caixa.tipo}">Item 1</td>
+                    <td th:text="${'R$ ' + caixa.getValorFormatado}">R$ 100,00</td>
+                    <td th:text="${caixa.status}">Ativo</td>
+                    <td>
+                        <a th:href="@{/excluir/{id}(id=${caixa.id})}" class="btn btn-danger" onclick="return confirmExclusao()">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            function confirmExclusao() {
+                return confirm('Confirma?');
+            }
+        </script>
+    </div>
+    </div>
+
+  <!-- Incluindo o JavaScript do Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

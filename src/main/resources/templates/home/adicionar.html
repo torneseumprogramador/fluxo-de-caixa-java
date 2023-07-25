@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluxo de caixa em java</title>
+  <!-- Incluindo o CSS do Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/app.css">
+</head>
+
+<body>
+  <div class="container margin20">
+    <h1>Fluxo de caixa em Java</h1>
+    <hr>
+
+    <form action="/cadastrar" method="post">
+        <div class="form-group">
+            <label for="tipo">Tipo:</label>
+            <input type="text" id="tipo" name="tipo" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="valor">Valor:</label>
+            <input type="number" step="0.01" id="valor" name="valor" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" class="form-control" required>
+                <option value="0">Despesa</option>
+                <option value="1">Receita</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    
+    </div>
+  </div>
+
+  <!-- Incluindo o JavaScript do Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
